@@ -1,0 +1,51 @@
+package com.example.beyourbestselfapp;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
+
+public class AnxietyVideo2 extends YouTubeBaseActivity {
+    private static String ATAG2 = "AnxietyVideo2";
+
+    YouTubePlayerView newYouTubeVideo_anxiety2;
+    Button btnAnxiety2;
+    YouTubePlayer.OnInitializedListener aInitializedListener2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_anxiety_video2);
+
+        btnAnxiety2 = (Button) findViewById(R.id.btnAnxiety2);
+        newYouTubeVideo_anxiety2 = (YouTubePlayerView) findViewById(R.id.youTubeAnxiety_play2);
+
+        aInitializedListener2 = new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider aprovider2, YouTubePlayer ayouTubePlayer2, boolean ab2) {
+                Log.d(ATAG2, "onClick: Done initializing.");
+                ayouTubePlayer2.loadVideo("psQkuax3xj0");
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider aprovider2, YouTubeInitializationResult ayouTubeInitializationResult2) {
+                Log.d(ATAG2, "onClick: Failed to initialize");
+            }
+        };
+
+        btnAnxiety2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(ATAG2, "onClick: Initializing YouTube Player.");
+                newYouTubeVideo_anxiety2.initialize(YTubeConfig.getApiKey(), aInitializedListener2);
+            }
+        });
+    }
+}
